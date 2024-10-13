@@ -5,29 +5,33 @@ var bcrypt = require('bcrypt'); // Importar bcrypt para el manejo de contraseña
 var app = express();
 
 // Conexión a MongoDB Atlas
-mongoose.connect('mongodb+srv://AlexanderMartinez:MABJ030923HMCRNNA5@ejercicio.32n5k.mongodb.net/', {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
+mongoose.connect('mongodb+srv://AlexanderMartinez:MABJ030923HMCRNNA5@ejercicio.32n5k.mongodb.net/', { 
+    useNewUrlParser: true, 
+    useUnifiedTopology: true 
+}).then(() => {
+    console.log('Conexión a MongoDB establecida');
+}).catch(err => {
+    console.error('Error de conexión a MongoDB:', err);
 });
 
 // Definición de los esquemas y modelos
 var userSchema = new mongoose.Schema({
-    nombre: String,
-    contraseña: String
+    nombre: { type: String, required: true, unique: true },
+    contraseña: { type: String, required: true }
 });
 
 var User = mongoose.model('User', userSchema);
 
 var messageSchema = new mongoose.Schema({
-    usuario: String,
-    mensaje: String,
+    usuario: { type: String, required: true },
+    mensaje: { type: String, required: true },
     timestamp: { type: Date, default: Date.now }
 });
 
 var Message = mongoose.model('Message', messageSchema);
 
 // Configuración del servidor
-var PORT = process.env.PORT || 80; // Escuchar en el puerto 80 para HTTP
+var PORT = process.env.PORT || 3000; // Cambiar a un puerto no privilegiado
 var server = app.listen(PORT, function() {
     console.log(`Servidor activo en el puerto ${PORT}`);
 });

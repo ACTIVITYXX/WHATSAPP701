@@ -46,13 +46,14 @@ socket.on('loginSuccess', function(data) {
     usuario.readOnly = true;
 
     // Cargar mensajes anteriores
-    socket.emit('getMessages');
+    socket.emit('getMessages'); // Este evento no está definido en el servidor. Se puede omitir o implementar si es necesario
 });
 
 // Manejar el evento de enviar un mensaje
 botonEnviar.addEventListener('click', function() {
     if (mensaje.value) {
         socket.emit('chat', {
+            usuario: usuario.value, // Incluye el nombre de usuario en el mensaje
             mensaje: mensaje.value
         });
     }

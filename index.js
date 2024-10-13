@@ -95,7 +95,7 @@ io.on('connection', function(socket) {
     socket.on('chat', function(data) {
         console.log(data);
         const nuevoMensaje = new Message({
-            usuario: data.usuario,
+            usuario: data.usuario, // Asegúrate de que aquí se utiliza el usuario
             mensaje: data.mensaje
         });
         

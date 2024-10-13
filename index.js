@@ -93,7 +93,14 @@ io.on('connection', function(socket) {
 
     // Manejo de mensajes del chat
     socket.on('chat', function(data) {
-        console.log(data);
+        console.log(data); // Verifica que contenga el usuario y el mensaje
+
+        // Asegúrate de que 'data.usuario' no sea undefined
+        if (!data.usuario) {
+            console.error('El usuario es undefined');
+            return; // Salir si no hay usuario
+        }
+
         const nuevoMensaje = new Message({
             usuario: data.usuario, // Asegúrate de que aquí se utiliza el usuario
             mensaje: data.mensaje

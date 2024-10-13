@@ -1,4 +1,4 @@
-//var socket = io.connect('http://localhost:5000');
+// var socket = io.connect('http://localhost:5000');
 var socket = io.connect('http://3.145.160.209:3000');
 
 var persona = document.getElementById('persona'),
@@ -46,7 +46,7 @@ socket.on('loginSuccess', function(data) {
     usuario.readOnly = true;
 
     // Cargar mensajes anteriores
-    socket.emit('getMessages'); // Este evento no está definido en el servidor. Se puede omitir o implementar si es necesario
+    socket.emit('getMessages');
 });
 
 // Manejar el evento de enviar un mensaje
